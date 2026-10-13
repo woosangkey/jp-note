@@ -1,7 +1,7 @@
 // 주술회전 일본어노트 — 오프라인 저장 (온라인이면 최신본, 오프라인이면 저장본)
 // 새 달(data/mNN.js)을 추가하면 VERSION 숫자를 올리고 FILES에 파일명을 넣을 것
-const VERSION = 'jjnote-v1';
-const FILES = ['./', 'index.html', 'data/m01.js', 'manifest.webmanifest', 'icon-192.png', 'icon-512.png'];
+const VERSION = 'jjnote-v2';
+const FILES = ['./', 'index.html', 'data/m01.js', 'data/m02.js', 'data/m03.js', 'data/m04.js', 'data/m05.js', 'data/m06.js', 'data/m07.js', 'data/m08.js', 'data/m09.js', 'data/m10.js', 'data/m11.js', 'data/m12.js', 'data/m13.js', 'data/final.js', 'manifest.webmanifest', 'icon-192.png', 'icon-512.png'];
 
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(VERSION).then(c => c.addAll(FILES)).then(() => self.skipWaiting()));

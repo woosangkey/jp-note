@@ -195,27 +195,35 @@ header.top h1 small{display:block;font-family:"Noto Sans KR";font-size:12px;colo
 <div id="print"></div>
 
 <script src="data/m01.js"></script>
+<script src="data/m02.js"></script>
+<script src="data/m03.js"></script>
+<script src="data/m04.js"></script>
+<script src="data/m05.js"></script>
+<script src="data/m06.js"></script>
+<script src="data/m07.js"></script>
+<script src="data/m08.js"></script>
+<script src="data/m09.js"></script>
+<script src="data/m10.js"></script>
+<script src="data/m11.js"></script>
+<script src="data/m12.js"></script>
+<script src="data/m13.js"></script>
+<script src="data/final.js"></script>
 <script>
 /* ================= 기본 설정 ================= */
 const START = '2026-10-13';            // Day 1 날짜
 const TOTAL = 365;
-const MONTHS = 1;                       // 공개된 월 데이터 수 (data/mNN.js)
 const DAYS = window.JJ_DAYS || {};
 const RANKS = [[0,'4급 주술사'],[30,'3급 주술사'],[60,'준2급 주술사'],[100,'2급 주술사'],[150,'준1급 주술사'],[220,'1급 주술사'],[365,'특급 주술사']];
 const PHASES = [
-  [1,140,'1기','이타도리 입학 ~ 교류회 (1~24화)','N5 기초'],
-  [141,147,'극장판','주술회전 0','N5 → N4'],
-  [148,281,'2기','회옥·옥절 + 시부야사변 (25~47화)','N4'],
-  [282,330,'3기','사멸회유','N3 진입'],
-  [331,365,'총정리','회화 미션 + 셀프 인터뷰 시험','N4~N3 완성']
+  [1,144,'1기','이타도리 입학 ~ 교류회·기수뇌동 (1~24화)','N5 → N4'],
+  [145,152,'극장판','주술회전 0','N4'],
+  [153,262,'2기','회옥·옥절 + 시부야사변 (25~47화)','N4 → N3'],
+  [263,330,'3기','사멸회유 전편 (48~59화)','N3'],
+  [331,365,'총정리','실전 회화 34일 + 졸업 인터뷰','N4~N3 완성']
 ];
-const EPISODES = [
-  [1,'両面宿儺','료멘스쿠나'],[2,'自分のために','자신을 위해'],[3,'鉄骨娘','철골 소녀'],[4,'呪胎戴天','주태대천'],[5,'呪胎戴天-弐-','주태대천 2'],
-  [6,'呪胎戴天-参-','주태대천 3'],[7,'急襲','급습'],[8,'退屈','지루함'],[9,'幼魚と逆罰','어린 물고기와 역벌'],[10,'無為転変','무위전변'],
-  [11,'固陋蠢愚','고루준우'],[12,'いつかの君へ','언젠가의 너에게'],[13,'また明日','내일 봐'],[14,'京都姉妹校交流会-団体戦0-','교토 자매학교 교류회 0'],[15,'京都姉妹校交流会-団体戦1-','교류회 단체전 1'],
-  [16,'京都姉妹校交流会-団体戦2-','교류회 단체전 2'],[17,'京都姉妹校交流会-団体戦3-','교류회 단체전 3'],[18,'賢者','현자'],[19,'黒閃','흑섬'],[20,'規格外','규격 외'],
-  [21,'呪術甲子園','주술 고시엔'],[22,'起首雷同','기수뇌동'],[23,'起首雷同-弐-','기수뇌동 2'],[24,'共犯','공범']
-];
+// [회차id, 일본어 제목, 한국어 제목, 시즌]  ('0' = 극장판, 'F' = 총정리)
+const EPISODES = [["1","両面宿儺","료멘스쿠나","1기"],["2","自分のために","자신을 위해","1기"],["3","鉄骨娘","철골 소녀","1기"],["4","呪胎戴天","주태대천","1기"],["5","呪胎戴天－弐－","주태대천 2","1기"],["6","雨後","비 온 뒤","1기"],["7","急襲","급습","1기"],["8","退屈","지루함","1기"],["9","幼魚と逆罰","어린 물고기와 역벌","1기"],["10","無為転変","무위전변","1기"],["11","固陋蠢愚","고루준우","1기"],["12","いつかの君へ","언젠가의 너에게","1기"],["13","また明日","내일 봐","1기"],["14","京都姉妹校交流会－団体戦(0)－","교토 자매학교 교류회 0","1기"],["15","京都姉妹校交流会－団体戦(1)－","교류회 단체전 1","1기"],["16","京都姉妹校交流会－団体戦(2)－","교류회 단체전 2","1기"],["17","京都姉妹校交流会－団体戦(3)－","교류회 단체전 3","1기"],["18","賢者","현자","1기"],["19","黒閃","흑섬","1기"],["20","規格外","규격 외","1기"],["21","呪術甲子園","주술 고시엔","1기"],["22","起首雷同","기수뇌동","1기"],["23","起首雷同－弐－","기수뇌동 2","1기"],["24","共犯","공범","1기"],["0","劇場版 呪術廻戦 0","극장판 주술회전 0","극장판"],["25","懐玉","회옥","2기"],["26","懐玉-弐-","회옥 2","2기"],["27","懐玉-参-","회옥 3","2기"],["28","懐玉-肆-","회옥 4","2기"],["29","玉折","옥절","2기"],["30","そういうこと","그런 거야","2기"],["31","宵祭り","전야제","2기"],["32","渋谷事変","시부야 사변","2기"],["33","渋谷事変 開門","시부야 사변 개문","2기"],["34","昏乱","혼란","2기"],["35","降霊","강령","2기"],["36","鈍刀","둔도","2기"],["37","赫鱗","혁린","2기"],["38","揺蕩","요탕","2기"],["39","揺蕩-弐-","요탕 2","2기"],["40","霹靂","벽력","2기"],["41","霹靂-弐-","벽력 2","2기"],["42","理非","이비","2기"],["43","理非-弐-","이비 2","2기"],["44","理非-参-","이비 3","2기"],["45","変身","변신","2기"],["46","変身-弐-","변신 2","2기"],["47","渋谷事変 閉門","시부야 사변 폐문","2기"],["48","執行","집행","3기"],["49","もう一度","한 번 더","3기"],["50","死滅回游について","사멸회유에 대해","3기"],["51","葦を啣む","갈대를 물다","3기"],["52","熱","열","3기"],["53","部品","부품","3기"],["54","東京第1結界①","도쿄 제1결계 1","3기"],["55","東京第1結界②","도쿄 제1결계 2","3기"],["56","東京第1結界③","도쿄 제1결계 3","3기"],["57","東京第1結界④","도쿄 제1결계 4","3기"],["58","東京第1結界⑤","도쿄 제1결계 5","3기"],["59","仙台結界","센다이 결계","3기"],["F","総まとめ","총정리 · 실전 회화","총정리"]];
+const epLabel = ep => ep === '0' ? '극장판' : ep === 'F' ? '총정리' : ep + '화';
 const isRev = d => d % 7 === 0 && d < 330;
 const isTest = d => d % 30 === 0 && d < 331;
 
@@ -240,7 +248,7 @@ function dateOf(day){ const s = new Date(START+'T00:00:00'); s.setDate(s.getDate
 const done = () => store.get('done', {});
 const isDone = d => !!done()[d];
 function hasContent(d){
-  if (d > MONTHS*30) return false;
+  if (d === TOTAL) return !!window.JJ_FINAL;
   return !!DAYS[d] || isRev(d) || isTest(d);
 }
 function nextDay(){ for (let d=1; d<=TOTAL; d++){ if (!isDone(d)) return d; } return TOTAL; }
@@ -333,7 +341,7 @@ async function playRec(key){
 const $app = document.getElementById('app');
 const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 function toast(msg){ const t = document.createElement('div'); t.className = 'toast'; t.textContent = msg; document.body.appendChild(t); setTimeout(() => t.remove(), 2600); }
-const AV_COLORS = {'이타도리':'#ff6b8a','후시구로':'#4a6cff','고죠':'#5aa9ff','쿠기사키':'#ff9f43','스쿠나':'#d6283f','야가':'#8a7a5a','이지치':'#7a8a9a','할아버지':'#9a8a7a'};
+const AV_COLORS = {'이타도리':'#ff6b8a','후시구로':'#4a6cff','고죠':'#5aa9ff','쿠기사키':'#ff9f43','스쿠나':'#d6283f','야가':'#8a7a5a','이지치':'#7a8a9a','할아버지':'#9a8a7a','게토':'#6b5bd6','나나미':'#c9a227','마키':'#2fa36b','판다':'#555','이누마키':'#7fb3d5','토도':'#b5651d','옷코츠':'#3d6fb6','리카':'#a64ca6','마히토':'#5e9c8f','죠고':'#e2603b','쵸소':'#8e2a3a','메이메이':'#c2b280','쥰페이':'#6d7fa3','하나미':'#4f8a3a','켄자쿠':'#7d3c98','텐겐':'#bfbfbf','히구루마':'#34495e','하카리':'#e67e22','나':'#1aa58a'};
 function avatar(who){
   const c = AV_COLORS[who] || Object.entries(AV_COLORS).find(([k]) => String(who).includes(k))?.[1] || '#8b6cff';
   return '<span class="av" style="background:'+c+'">'+esc(String(who||'?').charAt(0))+'</span>';
@@ -389,7 +397,7 @@ function viewHome(){
   h += '<div class="eprow lock"><span>극장판 · 2기 · 3기</span><span class="small">🔒</span></div></div></section>';
 
   h += '<section class="card"><h2>⚙️ 설정</h2>'
-     + '<div class="toggles"><button class="tg" id="rateBtn">말하기 속도: '+(opts.rate >= .9 ? '보통' : '느리게')+'</button><button class="tg" data-say="こんにちは。一緒に頑張りましょう。">🔊 음성 테스트</button><a class="tg" href="#print/1" style="text-decoration:none">🖨 1개월차 인쇄용</a></div>'
+     + '<div class="toggles"><button class="tg" id="rateBtn">말하기 속도: '+(opts.rate >= .9 ? '보통' : '느리게')+'</button><button class="tg" data-say="こんにちは。一緒に頑張りましょう。">🔊 음성 테스트</button></div><div class="toggles">'+Array.from({length:13},(_,i)=>'<a class="tg" href="#print/'+(i+1)+'" style="text-decoration:none">🖨 '+(i+1)+'월차</a>').join('')+'</div>'
      + '<div class="small muted">소리가 안 나면: 휴대폰 설정 › 일반 › 텍스트 음성 변환 › 기본 엔진(Google)에서 일본어 음성 데이터를 설치하세요. 카톡 안 브라우저가 아니라 Chrome으로 열어야 해요.</div></section>';
   h += '<div class="foot">장면 대사는 학습용으로 새로 쓴 문장이며 실제 대사와 다릅니다.<br>원작 영상은 정식 서비스(넷플릭스·라프텔 등)에서 함께 보세요.</div>';
   $app.innerHTML = h;
@@ -398,6 +406,7 @@ function viewHome(){
 
 /* ================= 화면: 하루 공부 ================= */
 function viewDay(d){
+  if (d === TOTAL) return viewFinal();
   if (isTest(d)) return viewTest(d);
   if (isRev(d)) return viewRevDay(d);
   const D = DAYS[d]; if (!D){ location.hash = ''; return; }
@@ -405,7 +414,7 @@ function viewDay(d){
   let h = '<header class="top"><a class="back" href="#" aria-label="홈">‹</a><div class="spacer"></div>'
         + (d > 1 && hasContent(d-1) ? '<a class="iconbtn" href="#day/'+(d-1)+'" style="text-decoration:none;line-height:40px">‹ 이전</a>' : '')
         + (hasContent(d+1) ? '<a class="iconbtn" href="#day/'+(d+1)+'" style="text-decoration:none;line-height:40px">다음 ›</a>' : '') + '</header>';
-  h += '<div class="daytag"><span class="chip">Day '+d+' · '+dateOf(d)+'</span><span class="chip ep">'+D.ep+'화 '+esc(D.epTitle)+'</span><span class="chip gr">'+esc(D.grammar.point)+'</span>'+(isDone(d) ? '<span class="chip" style="color:#4fe3b5">✓ 완료</span>' : '')+'</div>';
+  h += '<div class="daytag"><span class="chip">Day '+d+' · '+dateOf(d)+'</span><span class="chip ep">'+epLabel(D.ep)+' '+esc(D.epTitle)+'</span><span class="chip gr">'+esc(D.grammar.point)+'</span>'+(isDone(d) ? '<span class="chip" style="color:#4fe3b5">✓ 완료</span>' : '')+'</div>';
   h += '<div class="dtitle">'+esc(D.title)+'</div>';
 
   h += '<section class="card"><h2><span class="n">1</span> 오늘의 장면</h2><div class="scene">'+esc(D.scene)+'</div><div class="watch">▶ '+esc(D.watch)+'</div></section>';
@@ -539,6 +548,36 @@ function viewTest(d){
   fin.onclick = () => { if (!isDone(d)) markDone(d); location.hash = ''; };
 }
 
+/* ================= 화면: Day 365 졸업 인터뷰 ================= */
+function viewFinal(){
+  const F = window.JJ_FINAL; const d = TOTAL; const chk = store.get('final-chk', {});
+  let h = '<header class="top"><a class="back" href="#">‹</a></header>';
+  h += '<div class="daytag"><span class="chip">Day 365 · '+dateOf(d)+'</span><span class="chip gr">졸업 시험</span></div><div class="dtitle">'+esc(F.title)+'</div>';
+  h += '<section class="card"><div class="mission">'+esc(F.intro)+'</div><div class="rec"><button id="recBtn">🎙 인터뷰 전체 녹음</button><button id="playBtn">▶ 오늘 녹음</button><button id="p1">⏮ Day 1 녹음</button></div></section>';
+  F.qs.forEach((Q,i) => {
+    h += '<section class="card"><h2><span class="n">'+(i+1)+'</span> 질문 듣기 '+sayBtn(Q.q)+'</h2>'
+       + '<details class="reveal"><summary>질문 글자 보기</summary><div class="jp ja" style="font-size:17px">'+esc(Q.q)+'</div><div class="kana ja">'+esc(Q.qk)+'</div><div class="ko">'+esc(Q.ko)+'</div></details>'
+       + '<details class="reveal"><summary>모범답 보기</summary><div class="ex"><div class="body"><div class="jp ja" style="font-size:16px">'+esc(Q.a)+'</div><div class="ko">'+esc(Q.ak)+'</div></div>'+sayBtn(Q.a)+'</div></details>'
+       + '<div class="shadow" style="margin-top:10px"><button data-fc="'+i+'" class="'+(chk[i]?'on':'')+'">✓ 일본어로 대답했다</button></div></section>';
+  });
+  h += '<div id="cert"></div>';
+  h += '<div class="finish"><button class="cta" id="fin">'+(isDone(d) ? '🏅 특급 주술사 승급증 보기' : '20문제 대답하고 졸업하기')+'</button></div>';
+  $app.innerHTML = h; scrollTo(0,0);
+  const rb = document.getElementById('recBtn'); rb.onclick = () => toggleRec('final', rb);
+  document.getElementById('playBtn').onclick = () => playRec('final');
+  document.getElementById('p1').onclick = () => playRec('day1');
+  $app.querySelectorAll('[data-fc]').forEach(b => b.onclick = () => { const c = store.get('final-chk', {}); c[b.dataset.fc] = !c[b.dataset.fc]; store.set('final-chk', c); b.classList.toggle('on'); });
+  document.getElementById('fin').onclick = () => {
+    const n = Object.values(store.get('final-chk', {})).filter(Boolean).length;
+    if (!isDone(d) && n < 15){ toast('15문제 이상 대답해야 졸업할 수 있어요 (지금 '+n+'개)'); return; }
+    if (!isDone(d)) markDone(d);
+    document.getElementById('cert').innerHTML = '<section class="hero" style="text-align:center"><span class="rank">⚡ 特級呪術師</span><div class="big">특급 주술사 승급</div><div class="sub">365일 일본어 수행을 마쳤습니다</div>'
+      + '<div class="stats"><div class="stat"><b>'+doneCount()+'</b><span>완료한 날</span></div><div class="stat"><b>'+Object.keys(srs()).length+'</b><span>배운 단어</span></div><div class="stat"><b>'+n+'/20</b><span>인터뷰</span></div></div>'
+      + '<p class="sub" style="margin-top:14px">'+dateOf(1)+' 시작 → '+dateOf(TOTAL)+' 졸업<br>お疲れさまでした。ここからが本番です。</p></section>';
+    document.getElementById('cert').scrollIntoView({behavior:'smooth'});
+  };
+}
+
 /* ================= 화면: 단어 복습 (SRS) ================= */
 function viewReview(){
   const list = shuffle(dueWords()); let i = 0, ok = 0, back = false;
@@ -571,18 +610,35 @@ function viewWords(){
 
 /* ================= 인쇄용 (월별 워크북) ================= */
 function viewPrint(m){
-  const a = (m-1)*30+1, b = m*30;
-  let h = '<div class="pcover"><div class="kan">呪</div><h1>주술회전 일본어노트</h1><p style="font-size:14pt;margin:6mm 0 2mm">'+m+'개월차 워크북 · Day '+a+' ~ '+b+'</p><p style="color:#555">'+dateOf(a)+' ~ '+dateOf(b)+' · 1기 '+[...new Set(rangeDays(a,b).map(D => D.ep))].join('·')+'화</p>'
+  const a = (m-1)*30+1, b = Math.min(m*30, TOTAL);
+  let h = '<div class="pcover"><div class="kan">呪</div><h1>주술회전 일본어노트</h1><p style="font-size:14pt;margin:6mm 0 2mm">'+m+'개월차 워크북 · Day '+a+' ~ '+b+'</p><p style="color:#555">'+dateOf(a)+' ~ '+dateOf(b)+' · '+[...new Set(rangeDays(a,b).map(D => epLabel(D.ep)))].join(' · ')+'</p>'
         + '<p style="margin-top:20mm;font-size:10pt;color:#666">대사는 학습용으로 새로 쓴 문장입니다. 앱에서 음성을 들으며 함께 공부하세요.</p></div>';
-  let first = true;
+  const revAns = [];
   for (let d=a; d<=b; d++){
     const D = DAYS[d];
+    if (d === TOTAL && window.JJ_FINAL){
+      const F = window.JJ_FINAL;
+      h += '<div class="pday pb"><div class="ph"><b>Day 365 · '+esc(F.title)+'</b><span>'+dateOf(d)+'</span></div><div class="pko" style="margin-bottom:2mm">'+esc(F.intro)+'</div>'
+         + F.qs.map((Q,i) => '<div class="pq"><b>'+(i+1)+'.</b> <span class="ja">'+esc(Q.q)+'</span> <span class="pko">('+esc(Q.ko)+')</span></div><div class="pwrite"></div>').join('') + '</div>';
+      h += '<div class="pday pb"><div class="ph"><b>졸업 인터뷰 모범답</b><span>내 답과 비교해 보세요</span></div>'
+         + F.qs.map((Q,i) => '<div class="pq"><b>'+(i+1)+'.</b> <span class="ja">'+esc(Q.a)+'</span><div class="pko">'+esc(Q.ak)+'</div></div>').join('') + '</div>';
+      continue;
+    }
     if (isRev(d) || isTest(d)){
-      h += '<div class="pday"><div class="ph"><b>Day '+d+' · '+(isTest(d) ? '월말 테스트' : '주간 복습')+'</b><span>'+dateOf(d)+'</span></div><div class="pchk">앱에서 '+(isTest(d) ? '20문제 테스트 + 말하기 10문장 + Day 1 녹음과 비교' : '복습 퀴즈 10문제 + 이번 주 대사 몰아서 섀도잉')+'을 하세요. ☐ 완료 &nbsp; 점수: ____ / '+(isTest(d)?20:10)+'</div><div class="pchk">이번 '+(isTest(d)?'달':'주')+' 가장 기억에 남는 문장:</div><div class="pwrite"></div><div class="pwrite"></div></div>';
+      const test = isTest(d), ds = rangeDays(test ? d-29 : d-6, d-1);
+      const ws = [], ls = []; ds.forEach(X => { X.words.forEach(w => ws.push(w)); X.lines.concat(X.grammar.ex).forEach(l => ls.push(l)); });
+      const pick = (arr, n) => arr.filter((_, i) => i % Math.max(1, Math.floor(arr.length / n)) === 0).slice(0, n);
+      const pw = pick(ws, test ? 20 : 12), pl = pick(ls, test ? 10 : 4);
+      revAns.push({d, pw, pl});
+      h += '<div class="pday'+(test ? ' pb' : '')+'"><div class="ph"><b>Day '+d+' · '+(test ? (d/30)+'개월차 승급 시험' : '주간 복습')+'</b><span>'+dateOf(d)+'</span></div>';
+      if (!test) h += '<div class="pg">'+ds.map(X => '<div><span class="pt">'+esc(X.grammar.point)+'</span> — <span class="ja">'+esc(X.grammar.ex[0].ja)+'</span> ('+esc(X.grammar.ex[0].ko)+')</div>').join('')+'</div>';
+      h += '<div class="pq"><b>① 단어 뜻 쓰기</b></div><div class="pwords">'+pw.map(w => '<div><b>'+esc(w.w)+'</b> '+esc(w.r !== w.w ? w.r : '')+'<br>뜻: ________</div>').join('')+'</div>';
+      h += '<div class="pq"><b>② 일본어로 말하고 써 보기</b></div>'+pl.map((l,i) => '<div class="pq">'+(i+1)+'. '+esc(l.ko)+'</div><div class="pwrite"></div>').join('');
+      h += '<div class="pchk">☐ 앱 '+(test ? '20문제 테스트 + Day 1 녹음 비교' : '복습 퀴즈 10문제 + 대사 몰아서 섀도잉')+' &nbsp; 점수: ____ / '+(test?20:10)+'</div></div>';
       continue;
     }
     if (!D) continue;
-    h += '<div class="pday"><div class="ph"><b>Day '+d+' · '+esc(D.title)+'</b><span>'+dateOf(d)+' · '+D.ep+'화 '+esc(D.epTitle)+'</span></div>';
+    h += '<div class="pday"><div class="ph"><b>Day '+d+' · '+esc(D.title)+'</b><span>'+dateOf(d)+' · '+epLabel(D.ep)+' '+esc(D.epTitle)+'</span></div>';
     h += '<div class="pko" style="margin-bottom:2mm">'+esc(D.scene)+'</div>';
     D.lines.forEach(L => { h += '<div class="pl"><span class="pjp">'+esc(L.ja)+'</span> <span class="pko">— '+esc(L.who)+'</span><div class="pkana">'+esc(L.kana)+'</div><div class="pko">'+esc(L.ko)+'</div></div>'; });
     h += '<div class="pwords">'+D.words.map(w => '<div><b>'+esc(w.w)+'</b> '+esc(w.r !== w.w ? w.r : '')+'<br>'+esc(w.ko)+'</div>').join('')+'</div>';
@@ -592,7 +648,7 @@ function viewPrint(m){
     h += D.quiz.map((Q,i) => '<div class="pq">Q'+(i+1)+'. '+esc(Q.q)+' &nbsp; '+Q.choices.map((c,j) => '①②③'[j]+' <span class="ja">'+esc(c)+'</span>').join(' &nbsp; ')+'</div>').join('');
     h += '<div class="pchk">☐ 섀도잉 3회 &nbsp; ☐ 단어 8개 &nbsp; ☐ 미션 녹음 &nbsp; ☐ 퀴즈</div></div>';
   }
-  h += '<div class="pday pb"><div class="ph"><b>정답</b><span>'+m+'개월차</span></div><div class="pans">'+rangeDays(a,b).map(D => '<div>Day '+D.day+': '+D.quiz.map(Q => '①②③'[Q.a]).join(' ')+'</div>').join('')+'</div></div>';
+  h += '<div class="pday pb"><div class="ph"><b>정답</b><span>'+m+'개월차</span></div><div class="pans">'+rangeDays(a,b).map(D => '<div>Day '+D.day+': '+D.quiz.map(Q => '①②③'[Q.a]).join(' ')+'</div>').join('')+'</div>'+revAns.map(R => '<div class="pq"><b>Day '+R.d+'</b> ① '+R.pw.map(w => esc(w.w)+'='+esc(w.ko)).join(', ')+'<br>② '+R.pl.map((l,i) => (i+1)+'. <span class="ja">'+esc(l.ja)+'</span>').join(' ')+'</div>').join('')+'</div>';
   document.getElementById('print').innerHTML = h;
 }
 
